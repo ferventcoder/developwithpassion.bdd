@@ -6,10 +6,4 @@ namespace developwithpassion.bdd.core.commands
         {
         }
     }
-
-    public class NullParameterizedCommand<T> : IParameterizedCommand<T> {
-        public void run_against(T item)
-        {
-        }
-    }
 }

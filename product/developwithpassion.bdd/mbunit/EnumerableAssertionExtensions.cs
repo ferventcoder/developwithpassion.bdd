@@ -33,6 +33,11 @@ namespace developwithpassion.bdd.mbunit
             items_that_should_be_found.each(x => should_contain(items, x));
         }
 
+        static public void should_all_satisfy<T>(this IEnumerable<T> items, Predicate<T> condition)
+        {
+            items.each(x => condition(x).should_be_true());
+        }
+
         static public void should_not_contain<T>(this IEnumerable<T> items, params T[] items_that_should_not_be_found)
         {
             var list = new List<T>(items);

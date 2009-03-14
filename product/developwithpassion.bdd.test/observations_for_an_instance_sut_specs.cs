@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using bdddoc.core;
+using developwithpassion.bdd.mbunit;
 using developwithpassion.bdd.mbunit.standard;
 using developwithpassion.bdd.mbunit.standard.observations;
-using developwithpassion.bdd.mbunit;
 using MbUnit.Framework;
 using Rhino.Mocks;
 
@@ -46,7 +46,8 @@ namespace developwithpassion.bdd.test
 
 
             [Observation]
-            public void should_create_the_sut_and_automatically_mock_out_dependencies_that_can_be_mocked() {
+            public void should_create_the_sut_and_automatically_mock_out_dependencies_that_can_be_mocked()
+            {
                 result.should_not_be_null();
                 result.connection.should_be_an_instance_of<IDbConnection>();
                 result.command.should_be_an_instance_of<IDbCommand>();
@@ -65,8 +66,8 @@ namespace developwithpassion.bdd.test
                 SampleTestWithAnSut.dependencies = new Dictionary<Type, object>();
                 connection = MockRepository.GenerateMock<IDbConnection>();
                 command = MockRepository.GenerateMock<IDbCommand>();
-                SampleTestWithAnSut.dependencies.Add(typeof(IDbConnection),connection);
-                SampleTestWithAnSut.dependencies.Add(typeof(IDbCommand),command);
+                SampleTestWithAnSut.dependencies.Add(typeof (IDbConnection), connection);
+                SampleTestWithAnSut.dependencies.Add(typeof (IDbCommand), command);
             }
 
             protected override void because()
@@ -76,17 +77,33 @@ namespace developwithpassion.bdd.test
 
 
             [Observation]
-            public void should_create_the_sut_and_automatically_mock_out_dependencies_that_can_be_mocked() {
+            public void should_create_the_sut_and_automatically_mock_out_dependencies_that_can_be_mocked()
+            {
                 result.should_not_be_null();
                 result.connection.should_be_equal_to(connection);
                 result.command.should_be_equal_to(command);
             }
         }
 
+        [Observations]
+        public abstract class concern
+        {
+            [SetUp]
+            public void setup()
+            {
+                establish_context();
+                because();
+            }
+
+            protected virtual void establish_context() {}
+            protected abstract void because();
+        }
+
         public class SampleTestWithAnSut : observations_for_an_instance_sut<AClassWithDependences, AClassWithDependences> {}
 
 
-        public class AClassWithDependences  
+
+        public class AClassWithDependences
         {
             public IDbCommand command { get; private set; }
             public IDbConnection connection { get; private set; }

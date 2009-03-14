@@ -74,13 +74,10 @@
     <Compile Include="contexts\context.cs" />
     <Compile Include="contexts\create_the_sut.cs" />
     <Compile Include="contexts\it.cs" />
-    <Compile Include="core\commands\ChainedParameterizedCommand.cs" />
     <Compile Include="core\commands\IParameterizedCommand.cs" />
     <Compile Include="mbunit\AppendTestsToTestTree.cs" />
     <Compile Include="mbunit\BlockRun.cs" />
-    <Compile Include="LazyDelegateFieldInvocation.cs" />
-    <Compile Include="mbunit\RunAllDelegateBlocksInClassHierarchyTopDown.cs" />
-    <Compile Include="mbunit\TestDelegateInvoker.cs" />
+    <Compile Include="mbunit\StringAssertionExtensions.cs" />
     <Compile Include="mbunit\TestTreeArgs.cs" />
     <Compile Include="mbunit\DelegateRunInvoker.cs" />
     <Compile Include="core\commands\ChainedCommand.cs" />

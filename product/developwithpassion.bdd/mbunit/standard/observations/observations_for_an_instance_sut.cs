@@ -17,9 +17,14 @@ namespace developwithpassion.bdd.mbunit.standard.observations
                 if (dependency_needs_to_be_registered_for(dependency_type)) register_dependency_for_sut(dependency_type);
             });
 
-            var constructor_args = constructor_parameter_types.Select(constructor_parament_type => dependencies[constructor_parament_type]).ToArray();
+            var constructor_args = constructor_parameter_types.Select(constructor_parament_type => get_the_provided_dependency_assignable_from(constructor_parament_type)).ToArray();
 
             return (ContractUnderTest) Activator.CreateInstance(typeof (ClassUnderTest), constructor_args);
+        }
+
+        object get_the_provided_dependency_assignable_from(Type constructor_parament_type)
+        {
+            return dependencies[constructor_parament_type];
         }
 
         static bool dependency_needs_to_be_registered_for(Type dependency_type)
@@ -35,12 +40,12 @@ namespace developwithpassion.bdd.mbunit.standard.observations
 
         static bool does_not_have_dependency_registered_for(Type dependency_type)
         {
-            return !dependencies.ContainsKey(dependency_type);
+            return ! dependencies.ContainsKey(dependency_type);
         }
 
         static void register_dependency_for_sut(Type dependency_type)
         {
-            dependencies[dependency_type] = an(dependency_type);
+            dependencies[dependency_type] = an_item_of(dependency_type);
         }
 
 

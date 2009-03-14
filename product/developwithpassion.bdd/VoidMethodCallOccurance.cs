@@ -12,7 +12,7 @@ namespace developwithpassion.bdd
         {
             this.mock = mock;
             this.action = action;
-            mock.AssertWasCalled(action);
+            mock.AssertWasCalled(action, y => y.Repeat.AtLeastOnce());
         }
 
         public void times(int number_of_times_the_method_should_have_been_called)
@@ -24,11 +24,6 @@ namespace developwithpassion.bdd
         public void only_once()
         {
             times(1);
-        }
-
-        public void twice()
-        {
-            times(2);
         }
     }
 }

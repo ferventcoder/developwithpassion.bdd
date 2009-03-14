@@ -207,7 +207,7 @@ namespace developwithpassion.bdd.test
             protected override void because()
             {
                 result = an_observations_set_of_basic_behaviours<IDbConnection>.an<IDbConnection>();
-                result2 = an_observations_set_of_basic_behaviours<IDbConnection>.an(typeof (IDbConnection));
+                result2 = an_observations_set_of_basic_behaviours<IDbConnection>.an_item_of(typeof (IDbConnection));
             }
 
             [Observation]

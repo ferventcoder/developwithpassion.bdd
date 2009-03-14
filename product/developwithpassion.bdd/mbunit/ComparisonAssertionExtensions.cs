@@ -34,5 +34,15 @@ namespace developwithpassion.bdd.mbunit
         {
             Assert.AreEqual(expected, actual);
         }
+
+        static public void should_be_zero(this int actual)
+        {
+            Assert.AreEqual(0, actual);
+        }
+
+        static public void should_be_zero(this long actual)
+        {
+            Assert.AreEqual(0, actual);
+        }
     }
 }

@@ -118,7 +118,7 @@ namespace developwithpassion.bdd.concerns
             return instance;
         }
 
-        static public object an(Type type)
+        static public object an_item_of(Type type)
         {
             return MockRepository.GenerateStub(type, new object[0]);
         }

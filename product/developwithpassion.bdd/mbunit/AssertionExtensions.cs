@@ -25,10 +25,6 @@ namespace developwithpassion.bdd.mbunit
             item.should_be_equal_to(false);
         }
 
-        static public void should_be_equal_ignoring_case(this string item, string other)
-        {
-            Assert.AreEqual(other.ToLower(), item.ToLower());
-        }
 
         static public void should_not_throw_any_exceptions(this Action work_to_perform)
         {
