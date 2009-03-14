@@ -7,7 +7,12 @@ _ReSharper.*
 *.suo
 *.cache
 *~
+*.sql
 *.swp
 /build/buildartifacts
 /build/artifacts
+/build/deploy
+/build/config/app.config.vista
+/build/config/app.config.xp
+/build/config/log4net.config.xml
 
