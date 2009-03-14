@@ -33,19 +33,19 @@
   <ItemGroup>
     <Reference Include="developwithpassion.commons.core.infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\thirdparty\lib\developwithpassion.commons\developwithpassion.commons.core.infrastructure.dll</HintPath>
+      <HintPath>..\..\thirdparty\developwithpassion.commons\developwithpassion.commons.core.infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit.Framework, Version=2.4.2.130, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+    <Reference Include="mbunit.framework, Version=2.4.2.130, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\thirdparty\tools\mbunit\MbUnit.Framework.dll</HintPath>
+      <HintPath>..\..\thirdparty\mbunit\mbunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph, Version=2.4.2.130, Culture=neutral, PublicKeyToken=975e84d0c8d6464d">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\thirdparty\tools\mbunit\QuickGraph.dll</HintPath>
+      <HintPath>..\..\thirdparty\mbunit\QuickGraph.dll</HintPath>
     </Reference>
-    <Reference Include="rhino.mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\thirdparty\tools\rhino.mocks\rhino.mocks.dll</HintPath>
+      <HintPath>..\..\thirdparty\rhino.mocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

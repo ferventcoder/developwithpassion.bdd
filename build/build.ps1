@@ -18,12 +18,12 @@ properties{#directories
 
 	$product_dir = "$base_dir\product"
 
+
 	$sql_dir = "$build_dir\sql"
 	$sql_ddl_dir = "$sql_dir\ddl" 
 	$sql_data_dir = "$sql_dir\data" 
+  
   $third_party_dir = "$base_dir\thirdparty"
-  $third_party_tools_dir = "$third_party_dir\tools"
-  $third_party_lib_dir = "$third_party_dir\lib"
 }
 
 properties {#load in the build utilities file
@@ -36,11 +36,9 @@ properties {#load in the file that contains the name for the project
 
 properties{#filesets
   $all_template_files = get_file_names(get-childitem -path $build_dir -recurse -filter "*.template")
-  $third_party_libraries = get_file_names(get-childitem -path $third_party_lib_dir -recurse -filter *.dll)
-  $third_party_tools = get_file_names(get-childitem -path $third_party_tools_dir -recurse -filter "*.dll")
-  $third_party_exes = get_file_names(get-childitem -path $third_party_tools_dir -recurse -filter "*.exe")
-  $bdd_doc_resources = get_file_names(get-childitem -path $third_party_tools_dir\bdddoc -recurse  -include @("*.css","*.jpg"))
-  $all_third_party_dependencies = $third_party_tools  + $third_party_libraries + $third_party_exes + $bdd_doc_resources
+  $third_party_libraries = get_file_names(get-childitem -path $third_party_dir -recurse -include ("*.dll","*.exe"))
+  $bdd_doc_resources = get_file_names(get-childitem -path $third_party_dir\bdddoc -recurse  -include @("*.css","*.jpg"))
+  $all_third_party_dependencies = $third_party_libraries + $bdd_doc_resources
   $all_sql_ddl_template_files = get_file_names(get-childitem -path $sql_ddl_dir -recurse -filter *.sql.template)
   $all_sql_data_template_files = get_file_names(get-childitem -path $sql_data_dir -recurse -filter *.sql.template)
   $all_sql_template_files = $all_sql_ddl_template_files , $all_sql_data_template_files
@@ -49,12 +47,15 @@ properties{#filesets
 properties{ #files
 	$studio_app_config = "$product_dir\$project_name\bin\debug\$project_name.dll.config" 
 	$log4net_config = "$config_dir\log4net.config.xml" 
+	$hibernate_config = "$config_dir\hibernate.cfg.xml" 
+
 	$now = [System.DateTime]::Now
 	$project_lib = "$project_name.dll"
 	$project_test_lib = "$project_name.test.dll"
 	$db_timestamp = "$sql_dir\db.timestamp"
 	$nant_properties_file = "$build_dir\local_properties.xml"
 }
+
 	
 properties{#logging
 	$log_dir =  "$build_dir\logs"
@@ -82,14 +83,22 @@ properties{#other build files
 . .\assembly_build.ps1
 }
 
+properties{#utility functions
+  function sql_files_have_changed(){
+   return files_have_changed $all_sql_template_files $db_timestamp
+  }
+}
+
 task default -depends init
 
-task build_db -depends init{
-  $files_changed = files_have_changed $all_sql_template_files $db_timestamp
-
-  if ($files_changed -eq $true)
-  {
+task _build_db -depends init{
     process_sql_files $script:all_sql_ddl_files  $local_settings.osql_exe "-E"
+}
+
+task build_db -depends init{
+  if (sql_files_have_changed)
+  {
+    ExecuteTask _build_db
   }
   else
   {
@@ -99,6 +108,13 @@ task build_db -depends init{
 }
 
 task load_data -depends build_db {
+  if (sql_files_have_changed){
+    ExecuteTask _load_data
+  }
+
+}
+
+task _load_data -depends _build_db{
   process_sql_files $script:all_sql_data_files $local_settings.osql_exe "-E"
 }
 
@@ -115,25 +131,25 @@ task clean{
 }
 
 task compile -depends init{
- $result = MSBuild.exe "$base_dir\solution.sln" /t:Rebuild /p:Configuration=Debug
-  $script:product_outputs = get_file_names(get-childitem -path $product_dir -recurse -filter *.dll)
-  $script:product_debug_outputs = get_file_names(get-childitem -path $product_dir -recurse -filter *.pdb)
-
+ $result = MSBuild.exe "$base_dir\solution.sln" /t:Clean /t:Compile /p:Configuration=Debug
+ $script:product_outputs = get_file_names(get-childitem -path $product_dir -recurse -include ("*.dll","*.exe","*.pdb"))
  $result
 }
 
 task prep_for_distribution -depends compile{
   $all_third_party_dependencies | foreach-object {copy-item -path $_ -destination $build_artifacts_dir}
   $script:product_outputs | foreach-object {copy-item -path $_ -destination $build_artifacts_dir}
+
 }
 
 task setup_test -depends prep_for_distribution{
-    $script:product_outputs | foreach-object {copy-item -path $_ -destination $build_artifacts_dir}
-    $script:product_debug_outputs | foreach-object {copy-item -path $_ -destination $build_artifacts_dir}
+    copy-item $app_config -destination "$build_artifacts_dir\$project_test_lib.config"
+    copy-item $hibernate_config -destination $build_artifacts_dir
+    copy-item $log4net_config -destination $build_artifacts_dir
 }
 
 task test -depends setup_test{
-    $xunit = "$third_party_tools_dir\mbunit\MbUnit.Cons.exe"
+    $xunit = "$third_party_dir\mbunit\MbUnit.Cons.exe"
     $result = .$xunit $build_artifacts_dir\$project_test_lib /rt:"$($local_settings.xunit_report_type)" /rnf:"$($local_settings.xunit_report_file_name)" /rf:"$($local_settings.xunit_report_file_dir)" /sr
 
     $result
@@ -153,3 +169,4 @@ task run_ncover -depends setup_test{
 task run_test_report -depends test{
    $result = ."$build_artifacts_dir\bdddoc.console.exe" "$build_artifacts_dir\$project_test_lib" "ObservationAttribute" "$build_artifacts_dir\SpecReport.html" "$($local_settings.xunit_report_file_dir)\$($local_settings.xunit_report_file_name_with_extension)"
 }
+
