@@ -9,6 +9,7 @@ _ReSharper.*
 *~
 *.sql
 *.swp
+*.swo
 /build/buildartifacts
 /build/artifacts
 /build/deploy
