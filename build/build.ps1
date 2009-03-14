@@ -131,7 +131,7 @@ task clean{
 }
 
 task compile -depends init{
- $result = MSBuild.exe "$base_dir\solution.sln" /t:Clean /t:Compile /p:Configuration=Debug
+ $result = MSBuild.exe "$base_dir\solution.sln" /t:Clean /t:Build /p:Configuration=Debug
  $script:product_outputs = get_file_names(get-childitem -path $product_dir -recurse -include ("*.dll","*.exe","*.pdb"))
  $result
 }
