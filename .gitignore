@@ -9,4 +9,5 @@ _ReSharper.*
 *~
 *.swp
 /build/buildartifacts
+/build/artifacts
 
