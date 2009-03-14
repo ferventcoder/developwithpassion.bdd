@@ -9,7 +9,6 @@ properties{
   $mbunit_key_exists = test-path -path $mbunit_key
 }
 
-
 task update_test_driven{
   if (test-path $test_driven_key)
   {
