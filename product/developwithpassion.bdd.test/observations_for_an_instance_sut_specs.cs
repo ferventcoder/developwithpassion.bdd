@@ -13,7 +13,7 @@ namespace developwithpassion.bdd.test
     public class observations_for_an_instance_sut_specs
     {
         [Observations]
-        public abstract class concern_for_observations_of_an_instance_sut
+        public abstract class concern
         {
             protected SampleTestWithAnSut sut;
 
@@ -30,7 +30,7 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (observations_for_an_instance_sut<,>))]
-        public class when_creating_an_instance_of_the_sut_and_no_dependencies_have_been_provided : concern_for_observations_of_an_instance_sut
+        public class when_creating_an_instance_of_the_sut_and_no_dependencies_have_been_provided : concern
         {
             AClassWithDependences result;
 
@@ -55,7 +55,7 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (observations_for_an_instance_sut<,>))]
-        public class when_creating_an_instance_of_the_sut_and_dependencies_have_been_provided : concern_for_observations_of_an_instance_sut
+        public class when_creating_an_instance_of_the_sut_and_dependencies_have_been_provided : concern
         {
             AClassWithDependences result;
             IDbConnection connection;
@@ -77,26 +77,12 @@ namespace developwithpassion.bdd.test
 
 
             [Observation]
-            public void should_create_the_sut_and_automatically_mock_out_dependencies_that_can_be_mocked()
+            public void should_create_the_sut_using_the_dependencies_that_were_provided_by_the_client()
             {
                 result.should_not_be_null();
                 result.connection.should_be_equal_to(connection);
                 result.command.should_be_equal_to(command);
             }
-        }
-
-        [Observations]
-        public abstract class concern
-        {
-            [SetUp]
-            public void setup()
-            {
-                establish_context();
-                because();
-            }
-
-            protected virtual void establish_context() {}
-            protected abstract void because();
         }
 
         public class SampleTestWithAnSut : observations_for_an_instance_sut<AClassWithDependences, AClassWithDependences> {}

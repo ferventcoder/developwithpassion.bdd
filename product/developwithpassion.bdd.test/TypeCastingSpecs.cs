@@ -11,20 +11,19 @@ namespace developwithpassion.bdd.test
 {
     public class TypeCastingSpecs
     {
-        public abstract class concern_for_type_casting : observations_for_a_static_sut {}
+        public abstract class concern : observations_for_a_static_sut {}
 
-        [Concern(typeof (TypeCasting))]
-        public class when_a_legitimate_downcast_is_made : concern_for_type_casting
+        [Concern(typeof (TypeCastingExtensions))]
+        public class when_a_legitimate_downcast_is_made : concern
         {
-            it should_retrieve_the_object_back_downcasted_to_the_target_type = () =>
+            it should_not_fail = () =>
             {
-                IList<int> list = new List<int>();
-                var to = list.downcast_to<List<int>>();
+                new List<int>().downcast_to<List<int>>();
             };
         }
 
-        [Concern(typeof (TypeCasting))]
-        public class when_asking_if_an_object_is_not_an_instance_of_a_specific_type : concern_for_type_casting
+        [Concern(typeof (TypeCastingExtensions))]
+        public class when_determining_if_an_object_is_not_an_instance_of_a_specific_type : concern
         {
             it should_make_determination_based_on_whether_the_object_is_assignable_from_the_specific_type = () =>
             {

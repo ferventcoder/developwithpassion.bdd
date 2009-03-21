@@ -1,6 +1,6 @@
 namespace developwithpassion.bdd.core.extensions
 {
-    public static class TypeCasting
+    public static class TypeCastingExtensions
     {
         public static T downcast_to<T>(this object item)
         {

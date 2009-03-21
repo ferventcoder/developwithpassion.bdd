@@ -3,7 +3,7 @@ using MbUnit.Framework;
 
 namespace developwithpassion.bdd.mbunit
 {
-    static public class ComparisonAssertionExtensions
+    public static class ComparisonAssertionExtensions
     {
         static public void should_be_greater_than<T>(this T item, T other) where T : IComparable<T>
         {

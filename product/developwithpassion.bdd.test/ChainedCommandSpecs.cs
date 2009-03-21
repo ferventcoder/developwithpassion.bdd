@@ -7,7 +7,7 @@ namespace developwithpassion.bdd.test
 {
     public class ChainedCommandSpecs
     {
-        public abstract class concern_for_chained_command : observations_for_a_sut_with_a_contract<ICommand, ChainedCommand>
+        public abstract class concern : observations_for_a_sut_with_a_contract<ICommand, ChainedCommand>
         {
             static protected ICommand command_one;
             static protected ICommand command_two;
@@ -25,14 +25,14 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (ChainedCommand))]
-        public class when_it_runs : concern_for_chained_command
+        public class when_it_runs : concern
         {
             because b = () => sut.run();
 
             it should_run_each_command_it_is_composed_with = () =>
             {
-                command_one.was_told_to(x => x.run());
-                command_two.was_told_to(x => x.run());
+                command_one.received(x => x.run());
+                command_two.received(x => x.run());
             };
         }
     }

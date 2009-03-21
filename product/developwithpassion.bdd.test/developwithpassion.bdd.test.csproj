@@ -33,27 +33,27 @@
     <Reference Include="bdddoc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\thirdparty\bdddoc\bdddoc.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\thirdparty\castle\Castle.DynamicProxy2.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="developwithpassion.commons.core.infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\thirdparty\developwithpassion.commons\developwithpassion.commons.core.infrastructure.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MbUnit.Framework, Version=2.4.2.130, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\thirdparty\mbunit\MbUnit.Framework.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="rhino.mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\thirdparty\rhino.mocks\rhino.mocks.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -63,20 +63,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="an_observations_set_of_basic_behaviours_specs.cs" />
+    <Compile Include="AssertionExtensionsSpecs.cs" />
     <Compile Include="ChainedCommandSpecs.cs" />
     <Compile Include="DelegateFieldInvocationSpecs.cs" />
+    <Compile Include="EnumerableAssertionExtensionsSpecs.cs" />
+    <Compile Include="helpers\NumericExtensions.cs" />
     <Compile Include="IterationSpecs.cs" />
     <Compile Include="observations_for_an_instance_sut_specs.cs" />
+    <Compile Include="StringAssertionExtensionsSpecs.cs" />
     <Compile Include="StringExtensionsSpecs.cs" />
     <Compile Include="TypeCastingSpecs.cs" />
     <Compile Include="TypeExtensionsSpecs.cs" />
-    <Compile Include="WaitSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\developwithpassion.bdd\developwithpassion.bdd.csproj">
       <Project>{CA06C6F3-B8CA-4BDD-B428-2A79C74CC96C}</Project>
       <Name>developwithpassion.bdd %28developwithpassion.bdd\developwithpassion.bdd%29</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

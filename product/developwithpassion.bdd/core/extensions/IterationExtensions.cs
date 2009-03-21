@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace developwithpassion.bdd.core.extensions
 {
-    public static class Iteration
+    public static class IterationExtensions
     {
         public static IEnumerable<T> one_at_a_time<T>(this IEnumerable<T> items)
         {

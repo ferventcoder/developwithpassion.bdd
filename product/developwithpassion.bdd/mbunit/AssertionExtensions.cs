@@ -33,8 +33,15 @@ namespace developwithpassion.bdd.mbunit
 
         static public Type should_be_an_instance_of<Type>(this object item)
         {
+            return item.should_be_an<Type>();
+        }
+
+
+        static public Type should_be_an<Type>(this object item)
+        {
             Assert.IsInstanceOfType(typeof (Type), item);
             return (Type) item;
         }
+
     }
 }
