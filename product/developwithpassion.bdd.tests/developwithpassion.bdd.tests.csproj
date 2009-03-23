@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0B30C31A-42E9-4ECC-8AC3-3EEB4956F062}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>developwithpassion.bdd.test</RootNamespace>
-    <AssemblyName>developwithpassion.bdd.test</AssemblyName>
+    <RootNamespace>developwithpassion.bdd.tests</RootNamespace>
+    <AssemblyName>developwithpassion.bdd.tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -78,7 +78,7 @@
   <ItemGroup>
     <ProjectReference Include="..\developwithpassion.bdd\developwithpassion.bdd.csproj">
       <Project>{CA06C6F3-B8CA-4BDD-B428-2A79C74CC96C}</Project>
-      <Name>developwithpassion.bdd %28developwithpassion.bdd\developwithpassion.bdd%29</Name>
+      <Name>developwithpassion.bdd</Name>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

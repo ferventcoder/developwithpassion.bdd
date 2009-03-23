@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build", "build\build.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "developwithpassion.bdd", "product\developwithpassion.bdd\developwithpassion.bdd.csproj", "{CA06C6F3-B8CA-4BDD-B428-2A79C74CC96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "developwithpassion.bdd.test", "product\developwithpassion.bdd.test\developwithpassion.bdd.test.csproj", "{0B30C31A-42E9-4ECC-8AC3-3EEB4956F062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "developwithpassion.bdd.tests", "product\developwithpassion.bdd.tests\developwithpassion.bdd.tests.csproj", "{0B30C31A-42E9-4ECC-8AC3-3EEB4956F062}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ using developwithpassion.bdd.contexts;
 using developwithpassion.bdd.core.commands;
 using developwithpassion.bdd.mbunit.standard.observations;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class ChainedCommandSpecs
     {

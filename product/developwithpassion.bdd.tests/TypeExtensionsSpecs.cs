@@ -8,7 +8,7 @@ using developwithpassion.bdd.core.extensions;
 using developwithpassion.bdd.mbunit.standard.observations;
 using developwithpassion.bdd.mbunit;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class TypeExtensionSpecs
     {

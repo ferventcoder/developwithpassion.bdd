@@ -11,7 +11,7 @@ using developwithpassion.commons.core.infrastructure.containers;
 using MbUnit.Framework;
 using Rhino.Mocks;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class an_observations_set_of_basic_behaviours_specs
     {

@@ -8,7 +8,7 @@ using developwithpassion.bdd.mbunit.standard.observations;
 using MbUnit.Framework;
 using Rhino.Mocks;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class observations_for_an_instance_sut_specs
     {

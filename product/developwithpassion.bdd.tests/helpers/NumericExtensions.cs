@@ -1,4 +1,4 @@
-namespace developwithpassion.bdd.test.helpers
+namespace developwithpassion.bdd.tests.helpers
 {
     static public class NumericExtensions
     {
