@@ -19,7 +19,7 @@ namespace developwithpassion.bdd.containers
 
         static void do_in_initialized_container(Action action)
         {
-            lock (mutex)
+            perform_blocking_action(() =>
             {
                 if (container == null)
                 {
@@ -28,18 +28,23 @@ namespace developwithpassion.bdd.containers
                     Container.initialize_with(container);
                 }
                 action();
-            }
+            });
+        }
+
+        static void perform_blocking_action(Action action)
+        {
+            lock (mutex) action();
         }
 
 
         static public void tear_down()
         {
-            lock (mutex)
+            perform_blocking_action(() =>
             {
                 items = null;
                 container = null;
                 Container.initialize_with(null);
-            }
+            });
         }
     }
 }

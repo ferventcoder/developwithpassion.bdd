@@ -4,19 +4,19 @@ using System.Data;
 using bdddoc.core;
 using developwithpassion.bdd.concerns;
 using developwithpassion.bdd.contexts;
+using developwithpassion.bdd.mbunit;
 using developwithpassion.bdd.mbunit.standard;
 using developwithpassion.bdd.mbunit.standard.observations;
-using developwithpassion.bdd.mbunit;
 using developwithpassion.commons.core.infrastructure.containers;
 using MbUnit.Framework;
 using Rhino.Mocks;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class an_observations_set_of_basic_behaviours_specs
     {
         [Observations]
-        public abstract class concern_for_an_observations_set_of_basic_behaviours
+        public abstract class concern
         {
             protected SampleSetOfObservations sut;
 
@@ -35,7 +35,7 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (an_observations_set_of_basic_behaviours<>))]
-        public class when_told_to_setup : concern_for_an_observations_set_of_basic_behaviours
+        public class when_told_to_setup : concern
         {
             protected override void because()
             {
@@ -69,16 +69,9 @@ namespace developwithpassion.bdd.test
             }
         }
 
-        public abstract class concern_for_an_observations_set_of_basic_behaviours_that_has_run_its_setup : concern_for_an_observations_set_of_basic_behaviours
-        {
-            protected override void establish_context()
-            {
-                sut.setup();
-            }
-        }
 
         [Concern(typeof (an_observations_set_of_basic_behaviours<>))]
-        public class when_told_to_teardown : concern_for_an_observations_set_of_basic_behaviours
+        public class when_told_to_teardown : concern
         {
             protected override void establish_context()
             {
@@ -102,6 +95,14 @@ namespace developwithpassion.bdd.test
                 SampleSetOfObservations.context_block_ran.should_be_false();
                 SampleSetOfObservations.after_the_sut_has_been_created_block_ran.should_be_false();
                 an_observations_set_of_basic_behaviours<IDbConnection>.sut.was_never_told_to(x => x.Open());
+            }
+        }
+
+        public abstract class concern_for_an_observations_set_of_basic_behaviours_that_has_run_its_setup : concern
+        {
+            protected override void establish_context()
+            {
+                sut.setup();
             }
         }
 
@@ -182,7 +183,7 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (an_observations_set_of_basic_behaviours<>))]
-        public class when_its_doing_method_is_leveraged : concern_for_an_observations_set_of_basic_behaviours
+        public class when_its_doing_method_is_leveraged : concern
         {
             static Action action = () => {};
 
@@ -199,7 +200,7 @@ namespace developwithpassion.bdd.test
         }
 
         [Concern(typeof (an_observations_set_of_basic_behaviours<>))]
-        public class when_its_an_method_is_used_to_create_a_mock : concern_for_an_observations_set_of_basic_behaviours
+        public class when_its_an_method_is_used_to_create_a_mock : concern
         {
             IDbConnection result;
             object result2;
@@ -211,7 +212,7 @@ namespace developwithpassion.bdd.test
             }
 
             [Observation]
-            public void should_create_a_mock_of_the_specific_type()
+            public void should_create_a_mock_of_the_requested_type()
             {
                 result.should_not_be_null();
                 result2.should_be_an_instance_of<IDbConnection>();
@@ -221,7 +222,7 @@ namespace developwithpassion.bdd.test
 
     [Concern(typeof (an_observations_set_of_basic_behaviours<>))]
     public class when_it_makes_use_of_a_container_dependency :
-        observations_for_a_sut_without_a_contract<when_it_makes_use_of_a_container_dependency.SomeObjectWithContainerDependencies>
+        observations_for_a_sut_without_a_contract<SomeObjectWithContainerDependencies>
     {
         static IDbConnection connection;
 
@@ -240,13 +241,13 @@ namespace developwithpassion.bdd.test
         {
             connection.was_told_to(x => x.Open());
         }
+    }
 
-        public class SomeObjectWithContainerDependencies
+    public class SomeObjectWithContainerDependencies
+    {
+        public void do_something()
         {
-            public void do_something()
-            {
-                Container.current.get_an<IDbConnection>().Open();
-            }
+            Container.current.get_an<IDbConnection>().Open();
         }
     }
 }

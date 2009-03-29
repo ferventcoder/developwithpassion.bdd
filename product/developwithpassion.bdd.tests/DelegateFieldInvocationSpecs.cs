@@ -1,31 +1,30 @@
+using System;
 using bdddoc.core;
 using developwithpassion.bdd.contexts;
 using developwithpassion.bdd.core.commands;
 using developwithpassion.bdd.mbunit.standard.observations;
 using developwithpassion.bdd.mbunit;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class DelegateFieldInvocationSpecs
     {
-        public abstract class concern_for_delegate_field_invocation : observations_for_a_sut_with_a_contract<ICommand,
-                                                                          DelegateFieldInvocation> {}
+        public abstract class concern : observations_for_a_sut_with_a_contract<ICommand,DelegateFieldInvocation> {}
 
         [Concern(typeof (DelegateFieldInvocation))]
-        public class when_a_delegate_field_invocation_is_run : concern_for_delegate_field_invocation
+        public class when_run_with_a_specified_delegate_type : concern
         {
-            static SomeClassWithDelegateFields target;
-
             context c = () =>
             {
                 target = new SomeClassWithDelegateFields();
                 target.reset();
+
+                delegate_type_to_run = typeof (because);
             };
 
             because b = () => sut.run();
 
-
-            it should_invoke_all_of_the_delegates_in_the_taget_class_for_the_specific_delegate_type = () =>
+            it should_invoke_all_of_the_matching_delegate_fields_in_the_target_type_against_the_target_instance = () =>
             {
                 SomeClassWithDelegateFields.because_block_invocation_count.should_be_equal_to(2);
                 SomeClassWithDelegateFields.after_each_observation_block_invocation_count.should_be_equal_to(0);
@@ -34,8 +33,11 @@ namespace developwithpassion.bdd.test
 
             public override ICommand create_sut()
             {
-                return new DelegateFieldInvocation(typeof (because), target, typeof (SomeClassWithDelegateFields));
+                return new DelegateFieldInvocation(delegate_type_to_run, target, target.GetType());
             }
+
+            static Type delegate_type_to_run;
+            static SomeClassWithDelegateFields target;
         }
 
 

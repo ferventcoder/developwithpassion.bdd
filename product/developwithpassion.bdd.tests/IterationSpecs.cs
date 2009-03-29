@@ -5,13 +5,13 @@ using developwithpassion.bdd.core.extensions;
 using developwithpassion.bdd.mbunit.standard.observations;
 using developwithpassion.bdd.mbunit;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class IterationSpecs
     {
         public abstract class concern_for_iteration_extensions : observations_for_a_static_sut {}
 
-        [Concern(typeof (Iteration))]
+        [Concern(typeof (IterationExtensions))]
         public class when_generating_a_range_of_numbers : concern_for_iteration_extensions
         {
             static IEnumerable<int> result;

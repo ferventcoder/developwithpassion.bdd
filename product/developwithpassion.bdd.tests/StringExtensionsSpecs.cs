@@ -1,10 +1,10 @@
 using bdddoc.core;
 using developwithpassion.bdd.contexts;
 using developwithpassion.bdd.core.extensions;
-using developwithpassion.bdd.mbunit.standard.observations;
 using developwithpassion.bdd.mbunit;
+using developwithpassion.bdd.mbunit.standard.observations;
 
-namespace developwithpassion.bdd.test
+namespace developwithpassion.bdd.tests
 {
     public class StringExtensionsSpecs
     {
@@ -14,10 +14,14 @@ namespace developwithpassion.bdd.test
             static string result;
 
             because b = () =>
-                        result = "this is the {0};".format_using(1);
+            {
+                result = "this is the {0};".format_using(1);
+            };
 
-            it should_return_the_string_formatted_with_the_arguments = () =>
-                                                                       result.should_be_equal_to("this is the 1;");
+            it should_return_the_string_formatted_with_the_arguments_specified = () =>
+            {
+                result.should_be_equal_to("this is the 1;");
+            };
         }
     }
 }
