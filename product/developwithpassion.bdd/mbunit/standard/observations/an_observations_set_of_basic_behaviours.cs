@@ -34,8 +34,7 @@ namespace developwithpassion.bdd.concerns
             dependencies = new Dictionary<Type, object>();
             prepare_to_make_an_observation();
         }
-
-
+        
         [TearDown]
         public void tear_down()
         {
